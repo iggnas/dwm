@@ -2,11 +2,11 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 2;       /* default gap between windows in pixels */
+static const unsigned int gappx     = 4;       /* default gap between windows in pixels */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const unsigned int systrayspacing = 4;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -17,12 +17,23 @@ static const char *downvol[]    = { "/usr/bin/wpctl",   "set-volume", "@DEFAULT_
 static const char *mutevol[]    = { "/usr/bin/wpctl",   "set-mute",   "@DEFAULT_AUDIO_SINK@",      "toggle",   NULL };
 static const char *fonts[]          = { "DejaVuSansM Nerd Font:size=10" };
 static const char dmenufont[]       = "DejaVuSansM Nerd Font:size=10";
-static const char col_gray1[]       = "#1f222d"; // normal background
-static const char col_gray2[]       = "#2e3440"; // selected background
-static const char col_gray3[]       = "#4a5467"; // normal text (unfocused/inactive)
-static const char col_gray4[]       = "#81a1c1"; // selected text (focused/active)
-static const char col_cyan[]        = "#2e3440"; // cold blue for accents
-static const char col_border[]	    = "#81a1c1";
+
+//NORD
+//static const char col_gray1[]       = "#1f222d"; 
+//static const char col_gray2[]       = "#2e3440"; 
+//static const char col_gray3[]       = "#4a5467"; 
+//static const char col_gray4[]       = "#81a1c1"; 
+//static const char col_cyan[]        = "#2e3440"; 
+//static const char col_border[]      = "#81a1c1";
+
+//GRAY 
+static const char col_gray1[]       = "#151515";
+static const char col_gray2[]       = "#2a2a2a";
+static const char col_gray3[]       = "#3f3f3f";
+static const char col_gray4[]       = "#bfbfbf";
+static const char col_cyan[]        = "#2a2a2a";
+static const char col_border[]      = "#bfbfbf";
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -70,12 +81,14 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = {
     "j4-dmenu-desktop", 
-    "--dmenu=dmenu -i -b -fn 'Poppins:size=14' -nb '#1f222d' -nf '#4a5467' -sb '#2e3440' -sf '#81a1c1'", 
+    "--dmenu=dmenu -i -b -fn 'Poppins:size=14' -nb '#151515' -nf '#3f3f3f' -sb '#2a2a2a' -sf '#bfbfbf'", 
     NULL
 };
+
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *browsercmd[] = { "firefox-bin", NULL };
 static const char *cmdprintscreen[]  = { "flameshot", "gui", "--clipboard", NULL };
+static const char *filemgrcmd[] = { "pcmanfm,", NULL};
 
 #include "movestack.c"
 #define PrintScreenDWM	    0x0000ff61
@@ -84,6 +97,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,			XK_b,	   spawn,	   {.v = browsercmd } },
+	{ MODKEY,			XK_e,	   spawn,	   {.v = filemgrcmd } },
 	{ MODKEY,	                XK_Return, spawn,          {.v = termcmd } },
 	{ 0,    PrintScreenDWM,      spawn,          {.v = cmdprintscreen } },
 	{ MODKEY,                       XK_F10, spawn, {.v = downvol } },
@@ -142,4 +156,3 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
-
