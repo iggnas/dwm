@@ -1,2 +1,2 @@
-# dwm
-dwm and related 
+# my dwm and slastatus
+readme and screenshot todo
