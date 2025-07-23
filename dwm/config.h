@@ -1,3 +1,4 @@
+#include "movestack.c"
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
@@ -86,11 +87,12 @@ static const char *dmenucmd[] = {
 };
 
 static const char *termcmd[]  = { "kitty", NULL };
-static const char *browsercmd[] = { "firefox-bin", NULL };
+static const char *browsercmd[] = { "firefox", NULL };
 static const char *cmdprintscreen[]  = { "flameshot", "gui", "--clipboard", NULL };
-static const char *filemgrcmd[] = { "pcmanfm,", NULL};
+static const char *filemgrcmd[] = { "pcmanfm", NULL};
+static const char *discordcmd[] = { "vesktop", NULL};
+static const char *steamcmd[] = { "steam-native", "NULL" };
 
-#include "movestack.c"
 #define PrintScreenDWM	    0x0000ff61
 
 static const Key keys[] = {
@@ -98,6 +100,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,			XK_b,	   spawn,	   {.v = browsercmd } },
 	{ MODKEY,			XK_e,	   spawn,	   {.v = filemgrcmd } },
+	{ MODKEY,			XK_m,	   spawn,	   {.v = discordcmd } },
+	{ MODKEY,			XK_g,	   spawn,	   {.v = steamcmd } },
 	{ MODKEY,	                XK_Return, spawn,          {.v = termcmd } },
 	{ 0,    PrintScreenDWM,      spawn,          {.v = cmdprintscreen } },
 	{ MODKEY,                       XK_F10, spawn, {.v = downvol } },
@@ -109,7 +113,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Right,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,      focusstack,     {.i = -1 } },
 //	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-//	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+//	{ MODKEY,                       XK_k,      incnmaster,     {.i = -1 } },
+	{ MODKEY,             		XK_i,      setcfact,       {.f = +0.25} },
+	{ MODKEY,             		XK_k,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Right,      movestack,      {.i = +1 } },
